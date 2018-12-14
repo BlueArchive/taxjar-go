@@ -22,7 +22,15 @@ type Client struct {
 }
 
 func NewClient(token string) *Client {
-	c := &Client{Client: &http.Client{}, token: token, baseUri: "https://api.taxjar.com/v2", Debug: false}
+     return NewClientWithEndpoint(token, "https://api.taxjar.com/v2")
+}
+
+func NewSandboxClient(token string) *Client {
+     return NewClientWithEndpoint(token, "https://api.sandbox.taxjar.com/v2")
+}
+
+func NewClientWithEndpoint(token string, endpoint string) *Client {
+	c := &Client{Client: &http.Client{}, token: token, baseUri: endpoint, Debug: false}
 	c.Setup()
 	return c
 }
