@@ -7,6 +7,7 @@ import (
 // TaxRepository defines the interface for working with Tax through the API.
 type TaxRepository interface {
 	get(taxParams) (Tax, string, error)
+	validateVATNumber(string) (*VATIDValidation, error)
 }
 
 // TaxApi implements TaxRepository
@@ -27,7 +28,7 @@ func (api TaxApi) get(params taxParams) (Tax, string, error) {
 //
 // cdodge: Add this function to validate VAT ID
 //
-func (api TaxApi) ValidateVATNumber(number string) (*VATIDValidation, error) {
+func (api TaxApi) validateVATNumber(number string) (*VATIDValidation, error) {
 	validation := VATIDValidation{}
 	data, err := api.client.Get("/validation", &VATIDValidationParams{VAT: number})
 	if err != nil {

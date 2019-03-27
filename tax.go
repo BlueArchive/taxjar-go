@@ -96,7 +96,7 @@ type TaxService struct {
 }
 
 // Calculate sales Tax for a given order
-func (s *TaxService) Calculate(from, to Address, shipping, amount float64) (Tax,string,  error) {
+func (s *TaxService) Calculate(from, to Address, shipping, amount float64) (Tax, string, error) {
 	return s.Repository.get(taxParams{
 		FromStreet:  from.Street,
 		FromCity:    from.City,
@@ -129,6 +129,10 @@ func (s *TaxService) CalculateItems(from, to Address, nexuses []Address, shippin
 		LineItems:      items,
 		NexusAddresses: nexuses,
 	})
+}
+
+func (s *TaxService) ValidateVATNumber(number string) (*VATIDValidation, error) {
+	return s.Repository.validateVATNumber(number)
 }
 
 type TaxLineItem struct {
