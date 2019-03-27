@@ -96,7 +96,7 @@ type TaxService struct {
 }
 
 // Calculate sales Tax for a given order
-func (s *TaxService) Calculate(from, to Address, shipping, amount float64) (Tax, error) {
+func (s *TaxService) Calculate(from, to Address, shipping, amount float64) (Tax,string,  error) {
 	return s.Repository.get(taxParams{
 		FromStreet:  from.Street,
 		FromCity:    from.City,
@@ -113,7 +113,7 @@ func (s *TaxService) Calculate(from, to Address, shipping, amount float64) (Tax,
 	})
 }
 
-func (s *TaxService) CalculateItems(from, to Address, nexuses []Address, shipping float64, items []LineItem) (Tax, error) {
+func (s *TaxService) CalculateItems(from, to Address, nexuses []Address, shipping float64, items []LineItem) (Tax, string, error) {
 	return s.Repository.get(taxParams{
 		FromStreet:     from.Street,
 		FromCity:       from.City,
