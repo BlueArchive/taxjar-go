@@ -55,7 +55,7 @@ type VATIDValidation struct {
 }
 
 type VATIDValidationParams struct {
-	VAT string `json:"vat"`
+	VAT string `url:"vat"`
 }
 
 type Address struct {
