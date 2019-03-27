@@ -16,6 +16,48 @@ type TaxList struct {
 	Tax Tax `json:"tax"`
 }
 
+/*
+{
+  "validation": {
+    "valid": true,
+    "exists": true,
+    "vies_available": true,
+    "vies_response": {
+      "country_code": "DE",
+      "vat_number": "299168822",
+      "request_date": "2019-03-27",
+      "valid": true,
+      "name": "---",
+      "address": "---"
+    }
+  }
+}
+*/
+
+type VATViesResponse struct {
+	CountryCode string `json:"country_code"`
+	VATNumber   string `json:"vat_number"`
+	RequestData string `json:"request_date"`
+	Valid       bool   `json:"valid"`
+	Name        string `json:"name"`
+	Address     string `json:"address"`
+}
+
+type VATValidation struct {
+	Valid         bool             `json:"valid"`
+	Exists        bool             `json:"exists"`
+	ViesAvailable bool             `json:"vies_available"`
+	ViesResponse  *VATViesResponse `json:"vies_response"`
+}
+
+type VATIDValidation struct {
+	Validation VATValidation `json:"validation"`
+}
+
+type VATIDValidationParams struct {
+	VAT string `json:"vat"`
+}
+
 type Address struct {
 	Street  string `json:"street,omitempty"`
 	City    string `json:"city,omitempty"`

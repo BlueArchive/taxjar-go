@@ -23,3 +23,16 @@ func (api TaxApi) get(params taxParams) (Tax, error) {
 	err = json.Unmarshal(data, &taxList)
 	return taxList.Tax, err
 }
+
+//
+// cdodge: Add this function to validate VAT ID
+//
+func (api TaxApi) ValidateVATNumber(number string) (*VATIDValidation, error) {
+	validation := VATIDValidation{}
+	data, err := api.client.Get("/validation", &VATIDValidationParams{VAT: number})
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(data, &validation)
+	return &validation, err
+}
